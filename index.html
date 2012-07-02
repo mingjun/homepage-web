@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>徐明君的个人主页/Xu Mingjun's HomePage</title>
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<link rel="stylesheet" type="text/css" href="css/icon.css" />
+
+<style type="text/css">
+    
+    img#me {
+    	padding: 5px;
+    	float:right;
+    }
+    ul.follow {
+    	display: inline-block;
+    	vertical-align: text-bottom;
+    	margin: 0;
+    	padding: 0;
+    }
+    ul.follow>li {
+     	display: inline;
+    }
+    ul.follow img {
+     	width: 24px;
+     	height: 24px;
+    }
+    ul.follow a:hover {
+     	text-decoration: none;
+    }
+    
+    ul#interest>li {
+     	vertical-align:top;
+     	display: inline-block;
+     	width: 250px;
+     	height: 240px;
+     	margin: 2px 1px;
+    }
+    #chart {
+     	width: 100%;
+     	height: 90%;
+    }    
+	.center{text-align: center;}
+</style>
+</head>
+
+<body>
+
+
+<div id="main">
+<header>
+    <h1>欢迎光临<mark>徐明君</mark>的个人主页</h1>
+        <img class="box" id="me" src="img/me.png"></img>
+</header>
+<p>
+You are connecting to my 
+<span id="hardware">Machine</span> 
+<span id="running" class="hidden"></span>.
+</p>
+
+<ul id="interest">
+<li class="box">
+	<article>
+		<header class="center">国风·郑风·子衿</header>
+		<p>青青子衿，悠悠我心。纵我不往，子宁不嗣音？</p>
+		<p>青青子佩，悠悠我思。纵我不往，子宁不来？</p>
+		<p>挑兮达兮，在城阙兮。一日不见，如三月兮。</p>
+	</article>
+</li>
+<li class="box" ><div id="chart"></div></li>
+</ul>
+	<div style="clear:both;">
+	关注我：
+	<ul class="follow">
+		<li>
+		    <a href="http://weibo.com/cantycando" target="_blank">
+				<img src="http://weibo.com/favicon.ico" alt="weibo"></img>
+			</a>	    
+		</li>
+		<li>
+		    <a href="http://www.renren.com/mingjunx" target="_blank">
+		    	<img src="http://a.xnimg.cn/favicon-rr.ico"></img>
+		    </a>
+		</li>
+		<li>
+		    <a href="https://twitter.com/#!/MingjunXu" target="_blank">
+		    	<img src="img/tw1tter.png"></img>
+		    </a>
+		</li>
+		<li>
+		    <a href="https://www.facebook.com/MingjunXu" target="_blank">
+		    	<img src="img/faceb00k.png"></img>
+		    </a>
+		</li>
+		<li>
+		    <a href="http://tw.battle.net/wow/zh/character/%E5%B1%A0%E9%AD%94%E5%B1%B1%E8%B0%B7/%E6%A5%8A%E8%B6%85/simple"
+		        target="_blank">
+		    	<img src="img/faceb00k.png"></img>
+		    </a>
+		</li>
+	</ul>
+	</div>
+</div>
+
+<footer>
+<ul class="nav">
+	<li>
+	    <span class="email">
+		    <a href="mailto:mr DOT xu DOT mingjun AT gmail DOT com" target="_blank">Email</a>
+	    </span>    
+	</li>
+	<li>
+		<span class="xmj">
+	    <a href="http://about.xumingjun.name" target="_blank">About</a>
+	    </span>
+	</li>
+</ul>
+<address>
+   	Building 10, 399# Keyuan Road. Shanghai, 201203, China
+</address>
+</footer>
+<script type="text/javascript" src="js/dojo/dojo.js" data-dojo-config="async:true"></script>
+<script type="text/javascript" src="js/xmj/xmj.js"></script>
+<script type="text/javascript">
+
+var randomFun = function() {
+	var r = Math.random();
+	var q = Math.random();
+	var p = Math.random();
+	
+	return function(x) {
+		var height = 2/r;
+		var shift_y = height + q;
+		var freq = 10*q;
+		var shift_x = 25 * (p-0.5);
+		return height*Math.sin(x/freq+shift_x)+shift_y;
+	}
+};
+
+/*
+	format = "xy" | "y"
+	{from: 0, to: 100, delta: 1, fun: Math.sin, format: "xy"}
+*/
+var mathSample = function (args) {
+	var from = args.from,
+		to = args.to,
+		delta = args.delta || 1,
+		fun = args.fun || Math.sin,
+		format = 
+			(args.format === "y") ? 
+				(function(x,y) {return y;}):
+				(function(x,y) {return {x:x, y:y};})
+				 ;
+	var samples = [];
+	for(var x=from; x<=to; x+= delta) {
+		samples.push(format(x, fun(x)));
+	}
+	return samples;
+};
+
+require([
+	"dojo/domReady",
+	"dojo/dom",
+	"dojo/dom-class",
+	"dojo/json",
+	"dojo/_base/xhr",
+	"dojox/charting/Chart",
+	"dojox/charting/themes/ThreeD",
+	"dojox/charting/axis2d/Default",
+	"dojox/charting/plot2d/Lines",
+], 
+function(ready, dom, domClass, json, xhr, Chart, ThreeD) {
+	
+	ready(function () {
+		var customTheme = ThreeD.clone();
+		customTheme.plotarea.fill = "#fed";
+		var chart1 = new Chart("chart").
+		setTheme(customTheme).
+	    addAxis("x", {fixLower: "major", fixUpper: "major", natural: true, includeZero: true}).
+	    addAxis("y", {vertical: true, fixLower: "major", fixUpper: "major", natural: true, includeZero: true}).
+	    addPlot("default", {type: "Lines"/*"Markers"*/,tension: "S" }).
+	    addSeries("Series A", mathSample({from: -10, to: 10, delta: 0.9 })).
+	    addSeries("D", mathSample({from: -10, to: 10, delta: 1, fun: randomFun()})).
+	    addSeries("E", mathSample({from: -5, to: 10, delta: 1, fun: randomFun()})).
+	    render();
+		
+		xhr("GET", {url: "data/host", handleAs: "json"
+			}).then(function(hostInfo) {
+			console.log(hostInfo);
+			var hardware = dom.byId("hardware");
+			var version = hostInfo.hardware.Version;
+			if("Not Available" !== version) {
+				hardware.innerHTML = version;
+				domClass.add(hardware, "darkBlue");
+			}
+			var	running = dom.byId("running");
+			running.innerHTML = "(running for " + hostInfo.upTime + ")";
+			domClass.remove(running, "hidden");
+		});
+	});
+});
+	
+</script>
+</body>
+</html>

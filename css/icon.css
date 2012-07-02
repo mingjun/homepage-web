@@ -1,0 +1,11 @@
+@CHARSET "UTF-8";
+
+.email {
+	background: url(/img/mail.ico) no-repeat left 0;
+	padding: 0 0 0 16px;
+}
+
+.xmj {
+	background: url(/img/xmj.ico) no-repeat left 0;
+	padding: 0 0 0 16px;
+}
