@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="css/icon.css" />
 
 <style type="text/css">
-    
+
     img#me {
     	padding: 5px;
     	float:right;
@@ -28,19 +28,20 @@
     ul.follow a:hover {
      	text-decoration: none;
     }
-    
+
     ul#interest>li {
      	vertical-align:top;
      	display: inline-block;
-     	width: 250px;
-     	height: 240px;
+     	width: 450px;
+     	height: 200px;
      	margin: 2px 1px;
     }
     #chart {
      	width: 100%;
      	height: 90%;
-    }    
+    }
 	.center{text-align: center;}
+	 #upload {display: none;}
 </style>
 </head>
 
@@ -52,12 +53,6 @@
     <h1>欢迎光临<mark>徐明君</mark>的个人主页</h1>
         <img class="box" id="me" src="img/me.png"></img>
 </header>
-<p>
-You are connecting to my 
-<span id="hardware">Machine</span> 
-<span id="running" class="hidden"></span>.
-</p>
-
 <ul id="interest">
 <li class="box">
 	<article>
@@ -68,6 +63,15 @@ You are connecting to my
 	</article>
 </li>
 <li class="box" ><div id="chart"></div></li>
+<li class="box" >
+	<form id="form" action="data/files" method="post" 
+		enctype="multipart/form-data" target="upload">
+		<input type="file" id="file" name="file" multiple />
+		<button type="submit">Upload</button>
+		<a href="#" id="fileLink">#</a>
+	</form>
+	<iframe id="upload" name="upload" ></iframe>
+</li>
 </ul>
 	<div style="clear:both;">
 	关注我：
@@ -75,7 +79,7 @@ You are connecting to my
 		<li>
 		    <a href="http://weibo.com/cantycando" target="_blank">
 				<img src="http://weibo.com/favicon.ico" alt="weibo"></img>
-			</a>	    
+			</a>
 		</li>
 		<li>
 		    <a href="http://www.renren.com/mingjunx" target="_blank">
@@ -107,7 +111,7 @@ You are connecting to my
 	<li>
 	    <span class="email">
 		    <a href="mailto:mr DOT xu DOT mingjun AT gmail DOT com" target="_blank">Email</a>
-	    </span>    
+	    </span>
 	</li>
 	<li>
 		<span class="xmj">
@@ -122,84 +126,91 @@ You are connecting to my
 <script type="text/javascript" src="js/dojo/dojo.js" data-dojo-config="async:true"></script>
 <script type="text/javascript" src="js/xmj/xmj.js"></script>
 <script type="text/javascript">
-
-var randomFun = function() {
-	var r = Math.random();
-	var q = Math.random();
-	var p = Math.random();
-	
-	return function(x) {
-		var height = 2/r;
-		var shift_y = height + q;
-		var freq = 10*q;
-		var shift_x = 25 * (p-0.5);
-		return height*Math.sin(x/freq+shift_x)+shift_y;
-	}
-};
-
-/*
-	format = "xy" | "y"
-	{from: 0, to: 100, delta: 1, fun: Math.sin, format: "xy"}
-*/
-var mathSample = function (args) {
-	var from = args.from,
-		to = args.to,
-		delta = args.delta || 1,
-		fun = args.fun || Math.sin,
-		format = 
-			(args.format === "y") ? 
-				(function(x,y) {return y;}):
-				(function(x,y) {return {x:x, y:y};})
-				 ;
-	var samples = [];
-	for(var x=from; x<=to; x+= delta) {
-		samples.push(format(x, fun(x)));
-	}
-	return samples;
-};
-
 require([
 	"dojo/domReady",
 	"dojo/dom",
 	"dojo/dom-class",
 	"dojo/json",
+	"dojo/on",
 	"dojo/_base/xhr",
+	"dojo/_base/lang",
 	"dojox/charting/Chart",
 	"dojox/charting/themes/ThreeD",
 	"dojox/charting/axis2d/Default",
-	"dojox/charting/plot2d/Lines",
-], 
-function(ready, dom, domClass, json, xhr, Chart, ThreeD) {
-	
+	"dojox/charting/plot2d/Markers"
+],
+function(ready, dom, domClass, json, on, xhr, lang, Chart, ThreeD) {
 	ready(function () {
-		var customTheme = ThreeD.clone();
-		customTheme.plotarea.fill = "#fed";
-		var chart1 = new Chart("chart").
-		setTheme(customTheme).
-	    addAxis("x", {fixLower: "major", fixUpper: "major", natural: true, includeZero: true}).
-	    addAxis("y", {vertical: true, fixLower: "major", fixUpper: "major", natural: true, includeZero: true}).
-	    addPlot("default", {type: "Lines"/*"Markers"*/,tension: "S" }).
-	    addSeries("Series A", mathSample({from: -10, to: 10, delta: 0.9 })).
-	    addSeries("D", mathSample({from: -10, to: 10, delta: 1, fun: randomFun()})).
-	    addSeries("E", mathSample({from: -5, to: 10, delta: 1, fun: randomFun()})).
-	    render();
-		
-		xhr("GET", {url: "data/host", handleAs: "json"
-			}).then(function(hostInfo) {
-			console.log(hostInfo);
-			var hardware = dom.byId("hardware");
-			var version = hostInfo.hardware.Version;
-			if("Not Available" !== version) {
-				hardware.innerHTML = version;
-				domClass.add(hardware, "darkBlue");
-			}
-			var	running = dom.byId("running");
-			running.innerHTML = "(running for " + hostInfo.upTime + ")";
-			domClass.remove(running, "hidden");
+
+		xhr("GET", {url: "data/host/statistics", handleAs: "json"}).then(function(statistics) {
+			console.log(json.stringify(statistics));
+
+			var customTheme = ThreeD.clone();
+			customTheme.plotarea.fill = "#fed";
+
+			var chart1 = new Chart("chart").
+				setTheme(customTheme).
+			    addAxis("x", {
+			    	title: "时间",
+			    	titleOrientation: "away",
+			    	labels: statistics.xAxisLables ,
+			    	fixLower: "major", fixUpper: "major", natural: true, includeZero: false
+			    	}).
+			    addAxis("y", {
+			    	title: "访问量",
+			    	vertical: true, fixLower: "major", fixUpper: "major", natural: true, includeZero: true}).
+			    addPlot("default", {type: "Markers"}).
+			    addSeries("over-all", statistics.points).
+			    render();
+
 		});
+		
+		var cbs = {
+			onmessage: function(evt) {
+				var obj = json.parse(evt.data);
+				if(obj.messageType === "UploadedResult") {
+					var link = dom.byId("fileLink");
+					
+					link.innerHTML = obj.details[0].uploadedName;
+					link.href = obj.details[0].uploadedUrl;
+				}
+				console.log(evt.data);  
+		    },  
+			onclose: function(evt) {  
+				console.log("close", evt);
+		    },
+			onopen: function(evt) {  
+				console.log("open");  
+			},
+			onerror: function() {
+				console.log("error");
+			}
+		};
+   		var ws = null;
+   		on(dom.byId("form"), "submit", function(e){
+   			console.log("onsubmit", this, e);
+   			ws = createWs();
+  		});
+   		on(dom.byId("upload"), "load", function(e){
+   			console.log('upload done');
+   			setTimeout(function(){
+   				if(ws) {
+   	   				ws.close();
+   	   				ws = null;
+   	   			}
+   			}, 1000);
+   			
+   		});
+   		function createWs() {
+   			var url = "ws:"+location.hostname + ":8080"+"/data/files/status";
+   		    var ws = new (WebSocket || MozWebSocket || Function)(url);
+   		    console.log(url, ws);
+   		    lang.mixin(ws, cbs);
+   		    return ws;
+   		}
+	   	//});
 	});
 });
-	
 </script>
 </body>
 </html>

@@ -1,0 +1,17 @@
+#emacs temp file
+*~
+
+#test page
+test_*.html
+
+#auto write file
+visit.log
+
+#ignore directories
+dojo.src/dojo/*
+dojo.src/dijit/*
+dojo.src/dojox/*
+dojo.src/util/*
+
+js/*
+share/*
