@@ -3,6 +3,7 @@
 
 #test page
 test_*.html
+test_*.org
 
 #auto write file
 visit.log
