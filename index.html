@@ -8,40 +8,45 @@
 
 <style type="text/css">
 
-    img#me {
-    	padding: 5px;
-    	float:right;
-    }
-    ul.follow {
-    	display: inline-block;
-    	vertical-align: text-bottom;
-    	margin: 0;
-    	padding: 0;
-    }
-    ul.follow>li {
-     	display: inline;
-    }
-    ul.follow img {
-     	width: 24px;
-     	height: 24px;
-    }
-    ul.follow a:hover {
-     	text-decoration: none;
-    }
+	img#me {
+		padding: 5px;
+		margin: 5px;
+		float: right;
+	}
+	ul.follow {
+		display: inline-block;
+		vertical-align: text-bottom;
+		margin: 0;
+		padding: 0;
+	}
+	ul.follow>li {
+		display: inline;
+	}
+	ul.follow img {
+		width: 24px;
+		height: 24px;
+	}
+	ul.follow a:hover {
+		text-decoration: none;
+	}
 
-    ul#interest>li {
-     	vertical-align:top;
-     	display: inline-block;
-     	width: 450px;
-     	height: 200px;
-     	margin: 2px 1px;
-    }
-    #chart {
-     	width: 100%;
-     	height: 90%;
-    }
+	ul#interest>li {
+		vertical-align:top;
+		display: inline-block;
+		width: 340px;
+		height: 200px;
+		margin: 2px 1px;
+	}
+	.chart {
+		width: 100%;
+		height: 100%;
+	}
 	.center{text-align: center;}
-	 #upload {display: none;}
+	#upload {display: none;}
+	.upload{
+		margin: 5px;
+		max-width: 400px;
+	}
 </style>
 </head>
 
@@ -50,8 +55,8 @@
 
 <div id="main">
 <header>
-    <h1>欢迎光临<mark>徐明君</mark>的个人主页</h1>
-        <img class="box" id="me" src="img/me.png"></img>
+	<h1>欢迎光临<mark>徐明君</mark>的个人主页</h1>
+	<img class="box" id="me" src="img/me.png"></img>
 </header>
 <ul id="interest">
 <li class="box">
@@ -62,154 +67,135 @@
 		<p>挑兮达兮，在城阙兮。一日不见，如三月兮。</p>
 	</article>
 </li>
-<li class="box" ><div id="chart"></div></li>
-<li class="box" >
+</ul>
+
+<div class="box upload">
 	<form id="form" action="data/files" method="post" 
 		enctype="multipart/form-data" target="upload">
 		<input type="file" id="file" name="file" multiple />
 		<button type="submit">Upload</button>
-		<a href="#" id="fileLink">#</a>
 	</form>
+	<div class="hidden">
+		<progress max="100" value="0">0%</progress>
+		<span></span>
+	</div>
 	<iframe id="upload" name="upload" ></iframe>
-</li>
-</ul>
-	<div style="clear:both;">
+	<ul class="hidden"></ul>
+</div>
+
+<div>
 	关注我：
 	<ul class="follow">
 		<li>
-		    <a href="http://weibo.com/cantycando" target="_blank">
-				<img src="http://weibo.com/favicon.ico" alt="weibo"></img>
+			<a href="http://weibo.com/cantycando" target="_blank">
+				<img src="img/tw1tter.png" alt="weibo"></img>
 			</a>
 		</li>
 		<li>
-		    <a href="http://www.renren.com/mingjunx" target="_blank">
-		    	<img src="http://a.xnimg.cn/favicon-rr.ico"></img>
-		    </a>
+			<a href="http://www.renren.com/mingjunx" target="_blank">
+				<img src="img/faceb00k.png"></img>
+			</a>
 		</li>
 		<li>
-		    <a href="https://twitter.com/#!/MingjunXu" target="_blank">
-		    	<img src="img/tw1tter.png"></img>
-		    </a>
+			<a href="https://twitter.com/#!/MingjunXu" target="_blank">
+				<img src="img/tw1tter.png"></img>
+			</a>
 		</li>
 		<li>
-		    <a href="https://www.facebook.com/MingjunXu" target="_blank">
-		    	<img src="img/faceb00k.png"></img>
-		    </a>
+			<a href="https://www.facebook.com/MingjunXu" target="_blank">
+				<img src="img/faceb00k.png"></img>
+			</a>
 		</li>
 		<li>
-		    <a href="http://tw.battle.net/wow/zh/character/%E5%B1%A0%E9%AD%94%E5%B1%B1%E8%B0%B7/%E6%A5%8A%E8%B6%85/simple"
-		        target="_blank">
-		    	<img src="img/faceb00k.png"></img>
-		    </a>
+			<a href="http://tw.battle.net/wow/zh/character/%E5%B1%A0%E9%AD%94%E5%B1%B1%E8%B0%B7/%E6%A5%8A%E8%B6%85/simple"
+				target="_blank">
+				<img src="img/wow.jpg"></img>
+			</a>
 		</li>
 	</ul>
-	</div>
 </div>
 
-<footer>
+</div>
+
+<footer style="clear:both;">
 <ul class="nav">
 	<li>
-	    <span class="email">
-		    <a href="mailto:mr DOT xu DOT mingjun AT gmail DOT com" target="_blank">Email</a>
-	    </span>
+		<span class="email">
+			<a href="mailto:mr DOT xu DOT mingjun AT gmail DOT com" target="_blank">Email</a>
+		</span>
 	</li>
 	<li>
 		<span class="xmj">
-	    <a href="http://about.xumingjun.name" target="_blank">About</a>
-	    </span>
+		<a href="http://about.xumingjun.name" target="_blank">About</a>
+		</span>
 	</li>
 </ul>
 <address>
-   	Building 10, 399# Keyuan Road. Shanghai, 201203, China
+		Building 10, 399# Keyuan Road. Shanghai, 201203, China
 </address>
 </footer>
-<script type="text/javascript" src="js/dojo/dojo.js" data-dojo-config="async:true"></script>
-<script type="text/javascript" src="js/xmj/xmj.js"></script>
 <script type="text/javascript">
+var dojoConfig = {
+	baseUrl: "/js/",
+	packages: [
+		{ name: "dojo", location: "dojo" },
+		{ name: "dijit", location: "dijit" },
+		{ name: "dojox", location: "dojox" },
+		{ name: "xmj", location: "xmj", main: "xmj" }
+	]
+};
+</script>
+<script type="text/javascript" src="/js/dojo/dojo.js" data-dojo-config="async:true"></script>
+<script type="text/javascript">
+require(["xmj"], function(xmj){
+
 require([
 	"dojo/domReady",
 	"dojo/dom",
+	"dojo/dom-construct",
 	"dojo/dom-class",
+	"dojo/_base/array",
+	"dojo/query",
 	"dojo/json",
-	"dojo/on",
 	"dojo/_base/xhr",
-	"dojo/_base/lang",
-	"dojox/charting/Chart",
-	"dojox/charting/themes/ThreeD",
-	"dojox/charting/axis2d/Default",
-	"dojox/charting/plot2d/Markers"
+	"xmj/UploadHelper",
+	"xmj/formatter"
 ],
-function(ready, dom, domClass, json, on, xhr, lang, Chart, ThreeD) {
+function(ready, dom, domConstruct, domClass, array, query, json, xhr,
+		UploadHelper, formatter) {
 	ready(function () {
+		var uploadContainer = query(".upload")[0];
+		var progressContainer = query("form~div", uploadContainer)[0];
+		function createLinks(fileInfos) {
+			domClass.add(progressContainer, "hidden");
+			var list = query("iframe#upload+ul", uploadContainer)[0];
+			fileInfos && domClass.toggle(list, "hidden", fileInfos.length===0);
+			array.forEach(fileInfos, function(info) {
+				var item = domConstruct.create("li", {}, list, "last");
+				var a = domConstruct.create("a", {href: info.uploadedUrl, innerHTML: info.uploadedName}, item, "only");
+			});
+		}
+
+		var progress = query("progress", progressContainer)[0];
+		var uploadPogressText = query("span", uploadContainer)[0];
+		function showProgress(p) {
+			console.log(p);
+			domClass.remove(progressContainer, "hidden");
+			uploadPogressText.innerHTML = formatter.toSpace(p.uploadSize) +"/"+ formatter.toSpace(p.totalSize);
+			progress.value=p.percentage;
+		}
+		(new UploadHelper).bind(query("form", uploadContainer)[0], dom.byId("upload"), showProgress, createLinks);
 
 		xhr("GET", {url: "data/host/statistics", handleAs: "json"}).then(function(statistics) {
-			console.log(json.stringify(statistics));
-
-			var customTheme = ThreeD.clone();
-			customTheme.plotarea.fill = "#fed";
-
-			var chart1 = new Chart("chart").
-				setTheme(customTheme).
-			    addAxis("x", {
-			    	title: "时间",
-			    	titleOrientation: "away",
-			    	labels: statistics.xAxisLables ,
-			    	fixLower: "major", fixUpper: "major", natural: true, includeZero: false
-			    	}).
-			    addAxis("y", {
-			    	title: "访问量",
-			    	vertical: true, fixLower: "major", fixUpper: "major", natural: true, includeZero: true}).
-			    addPlot("default", {type: "Markers"}).
-			    addSeries("over-all", statistics.points).
-			    render();
-
+			require(["xmj/chart"], function(chart){
+				var li = domConstruct.create("li", {className: "box"}, dom.byId("interest"), "last");
+				var div = domConstruct.create("div", {className: "chart"}, li, "only");
+				chart(statistics, div);
+			});
 		});
-		
-		var cbs = {
-			onmessage: function(evt) {
-				var obj = json.parse(evt.data);
-				if(obj.messageType === "UploadedResult") {
-					var link = dom.byId("fileLink");
-					
-					link.innerHTML = obj.details[0].uploadedName;
-					link.href = obj.details[0].uploadedUrl;
-				}
-				console.log(evt.data);  
-		    },  
-			onclose: function(evt) {  
-				console.log("close", evt);
-		    },
-			onopen: function(evt) {  
-				console.log("open");  
-			},
-			onerror: function() {
-				console.log("error");
-			}
-		};
-   		var ws = null;
-   		on(dom.byId("form"), "submit", function(e){
-   			console.log("onsubmit", this, e);
-   			ws = createWs();
-  		});
-   		on(dom.byId("upload"), "load", function(e){
-   			console.log('upload done');
-   			setTimeout(function(){
-   				if(ws) {
-   	   				ws.close();
-   	   				ws = null;
-   	   			}
-   			}, 1000);
-   			
-   		});
-   		function createWs() {
-   			var url = "ws:"+location.hostname + ":8080"+"/data/files/status";
-   		    var ws = new (WebSocket || MozWebSocket || Function)(url);
-   		    console.log(url, ws);
-   		    lang.mixin(ws, cbs);
-   		    return ws;
-   		}
-	   	//});
 	});
+});
+
 });
 </script>
 </body>

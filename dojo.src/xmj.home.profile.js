@@ -7,12 +7,6 @@ dependencies = {
 			]
 		},
 		{
-			name: "../dojox/grid/DataGrid.js",
-			dependencies: [
-				"dojox.grid.DataGrid"
-			]
-		},
-		{
 			name: "../xmj/xmj.js",
 			dependencies: [
 				"xmj.xmj"
@@ -25,4 +19,4 @@ dependencies = {
 		[ "dojox", "../dojox" ],
         [ "xmj", "../xmj" ]
 	]
-}
+};

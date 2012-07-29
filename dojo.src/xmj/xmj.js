@@ -1,9 +1,9 @@
 define(
 [
- 	".",
- 	"./test"
+	"./chart",
+	"./UploadHelper",
+	"./formatter"
 ],
-function(xmj) {
-	
-	return xmj;
+function(chart) {
+	return {version: new Date().toString()};
 });
