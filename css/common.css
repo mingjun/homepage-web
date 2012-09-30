@@ -35,8 +35,17 @@ ul.nav>li {
 	border-left-width: 1px; 
 	padding: 0 5px;
 }
-
-
+/* articles */
+article > header {
+	font-size: 120%;
+}
+article> p:first-letter {
+	float:left;
+	margin:0 3px;
+	font-size:150%;
+	color: darkgrey;
+	font-weight:bold;
+}
 .darkBlue {
     color: darkBlue;
 }
