@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>搜索你的世界</title>
+<link rel="stylesheet" type="text/css" href="../css/common.css" />
+<style type="text/css">
+	.output {
+		margin-top: 20px;
+	}
+	.output > ul {
+		padding: 0;
+	}
+	.output > ul > li {
+		display: block;
+		margin-top: 10px;
+	}
+	.output > ul > li:first-child {
+		margin-top: 0;
+	}
+</style>
+</head>
+<body>
+<div id="main">
+	<header><h1>搜索你的世界</h1></header>
+	<form action="">
+		<input type="search" name="clue" autofocus x-webkit-speech/>
+		<button type="submit">搜索</button>
+	</form>
+	<div class="output"></div>
+</div>
+<script type="text/javascript">
+var rootUrl="..";
+var dojoConfig = {
+	baseUrl: "../js/",
+	packages: [
+		{ name: "dojo", location: "dojo" },
+		{ name: "dijit", location: "dijit" },
+		{ name: "dojox", location: "dojox" },
+		{ name: "xmj", location: "xmj", main: "xmj" }
+	]
+};
+</script>
+<script type="text/javascript" src="../js/dojo/dojo.js" data-dojo-config="async:true"></script>
+<script type="text/javascript">
+require(["xmj"], function(xmj){
+require([
+		"dojo/query",
+		"xmj/SearchHelper"
+	],
+	function(query, SearchHelper) {
+	var helper = new SearchHelper({
+		baseUrl: rootUrl,
+		formNode: query("form")[0],
+		outputNode: query(".output")[0]
+	});
+	helper.bind();
+});
+});
+</script>
+</body>
+</html>
