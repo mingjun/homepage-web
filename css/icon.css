@@ -9,3 +9,28 @@
 	background: url(/img/xmj.ico) no-repeat left 0;
 	padding: 0 0 0 16px;
 }
+
+.icon24 {
+	height: 24px;
+	width: 24px;
+	display: inline-block;
+}
+.wow, .tw1tter, .faceb00k, .weibo, .renren{
+	background-image: url(http://localhost/img/icons.png);
+	background-repeat: no-repeat;
+}
+.wow {
+	background-position: 0 0;
+}
+.tw1tter {
+	background-position: 0 -23px;
+}
+.faceb00k {
+	background-position: 0 -47px;
+}
+.weibo {
+	background-position: 0 -72px;
+}
+.renren {
+	background-position: 0 -97px;
+}
