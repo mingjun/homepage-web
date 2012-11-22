@@ -24,7 +24,6 @@ define([
 	 * ...
 	 */
 	function reorderMid2Sides(x, n) {
-		var y = 0;
 		var m = Math.floor(n-1)/2;
 		return (x % 2 === 0) ?
 		 (m - (x/2)) :
@@ -46,9 +45,13 @@ define([
 	}
 	var domNode = {};
 	function displayImages(simpleImageList) {
+		var urls = [];
+		for(var i=0;i<simpleImageList.length;i++) {
+			urls.push(simpleImageList[i].url);
+		}
 		xhr("GET", {
 			url: "/data/photo/details",
-			content: {photoURLs: json.stringify(simpleImageList)},
+			content: {photoURLs: json.stringify(urls)},
 			handleAs: "json"
 		}).then(function(dList) {
 			var mid = (dList.length-1)/2;
