@@ -8,11 +8,11 @@ test_*.org
 #auto write file
 visit.log
 
-#ignore directories
-dojo.src/dojo/*
-dojo.src/dijit/*
-dojo.src/dojox/*
-dojo.src/util/*
+# dojo lib file
+js/dijit/*
+js/dojo/*
+js/dojox/*
+js/util/*
 
-js/*
+# share folder
 share/*
