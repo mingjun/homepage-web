@@ -1,13 +1,20 @@
 #!/bin/bash
 
-TARGET_DIR=$HOME/sites/www
+TARGET_DIR=${PWD}/../www
 echo build target: $TARGET_DIR
+
+
+cat <<LINES
+-------------------------------------------
+
+
+LINES
 
 echo synchronize html/img/css
 rsync -rtpzuv --delete --exclude-from=exclude.list ./ $TARGET_DIR/
 
 cat <<LINES
-
+-------------------------------------------
 
 
 LINES
