@@ -1,0 +1,8 @@
+share/*
+js/*
+build.sh
+exclude.list
+
+.*
+*~
+test*.html
