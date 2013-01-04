@@ -14,7 +14,7 @@ define([
 		    	title: "时间",
 		    	titleOrientation: "away",
 		    	labels: statistics.xAxisLables ,
-		    	fixLower: "major", fixUpper: "major", natural: true, includeZero: false
+		    	fixLower: "major", fixUpper: "major", natural: true, includeZero: false, rotation: -30
 		    	}).
 		    addAxis("y", {
 		    	title: "访问量",
