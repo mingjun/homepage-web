@@ -51,7 +51,7 @@
 		float:right;
 	}
 	.formula {
-		font-size: 3.5em;
+		font-size: 3em;
 	}
 </style>
 </head>
@@ -65,14 +65,6 @@
 	<img class="box" id="me" src="img/me.png"></img>
 </header>
 <ul id="interest">
-<li class="box">
-	<article>
-		<header class="center">国风·郑风·子衿</header>
-		<p>青青子衿，悠悠我心。纵我不往，子宁不嗣音？</p>
-		<p>青青子佩，悠悠我思。纵我不往，子宁不来？</p>
-		<p>挑兮达兮，在城阙兮。一日不见，如三月兮。</p>
-	</article>
-</li>
 <li class="box">
 	<article class="wenxin">
 		<header class="center"><a href="wenxin" target="_blank">文心</a>雕龙</header>
@@ -229,13 +221,6 @@ function(ready, dom, domConstruct, domClass, array, on, query, json, xhr,
 		}
 		(new UploadHelper).bind(query("form", uploadContainer)[0], dom.byId("upload"), showProgress, createLinks);
 
-		xhr("GET", {url: "data/host/statistics", handleAs: "json"}).then(function(statistics) {
-			require(["xmj/chart"], function(chart){
-				var li = domConstruct.create("li", {className: "box"}, dom.byId("interest"), "last");
-				var div = domConstruct.create("div", {className: "chart"}, li, "only");
-				chart(statistics, div);
-			});
-		});
 	});
 });
 

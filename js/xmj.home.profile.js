@@ -12,15 +12,6 @@ dependencies = {
 				"xmj.xmj",
 				"dojo.selector.acme"
 			]
-		},
-		{
-			name: "../xmj/chart.js",
-			dependencies: [
-				"xmj.chart",
-				"dojox.gfx.svg",
-				"dojox.gfx.shape",
-				"dojox.gfx.path"
-			]
 		}
 	],
 
