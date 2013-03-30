@@ -10,21 +10,20 @@ body {
 	background: black;
 }
 .album {
-	border: 0px dotted orange;
 	width: 100%;
 	height: 500px;
+	font-size: 0;
 }
 .album > .previous, .album > .next, .album > .current {
 	display: inline-block;
 	height: 85%;
-	margin-top: 20px;
+	margin: 20px 0;
 	background-repeat: no-repeat;
 }
 .previous, .next {
 	cursor: pointer;
 	min-width: 30px;
-	width: 10%;
-	margin: 0 -3px;
+	width: 20%;
 	background-size: auto 100%;
 }
 .previous {
@@ -37,15 +36,14 @@ body {
 }
 .current {
 	min-width: 240px;
-	width: 80%;
-	margin: 0px -2px;
+	width: 60%;
 	background-size: auto 100%;
 	background-position: center center;
 }
 .message {
 	color: orange;
 	text-align: center;
-	font-size: 2em;
+	font-size: 20px;
 	display: block;
 	clear: both;
 }
@@ -56,6 +54,7 @@ body {
 .menu {
 	color: orange;
 	text-align: center;
+	font-size: 20px;
 }
 .menu > * {
 	cursor: pointer;
