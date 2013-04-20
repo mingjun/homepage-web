@@ -33,23 +33,33 @@
 		vertical-align:top;
 		display: inline-block;
 		width: 340px;
-		height: 215px;
+		height: 310px;
 		margin: 2px 1px;
 	}
-	.chart {
-		width: 100%;
-		height: 100%;
+	#interest article > header {
+		color: rgba(116, 4, 116, 0.93);
 	}
+	.literature, .math, .phy, .chem {
+		max-width: 90%;
+		max-height: 90%;
+		margin: 0 auto;
+		display: block;
+	}
+	.literature {
+		width: 80%;
+		margin-top: 40px;
+	}
+	.math {
+		margin-top: 80px;
+	}
+	.phy {
+		margin-top: 20px;
+	}
+	.chem {
+		height: 290px;
+	}
+	
 	.center {text-align: center;}
-	#upload {display: none;}
-	.upload {margin: 5px;}
-	.upload > .heading {
-		background-color: lightgray;
-		border: 0;
-	}
-	.upload > .action > form > button {
-		float:right;
-	}
 	.formula {
 		font-size: 3em;
 	}
@@ -68,7 +78,7 @@
 <li class="box">
 	<article class="wenxin">
 		<header class="center"><a href="wenxin" target="_blank">文心</a>雕龙</header>
-		<p>
+		<p class="literature">
 			夫<a href="wenxin" target="_blank">文心</a>者，言为文之用心也。
 			昔涓子《琴心》，王孙《巧心》，心哉美矣，故用之焉。
 			古来文章，以雕缛成体，岂取驺奭之群言雕龙也。
@@ -80,12 +90,26 @@
 	</article>
 </li>
 <li class="box">
-	<article >
+	<article>
 		<header class="center">数学之美：欧拉恒等式</header>
-		<span class="formula">\( e^{i \pi} + 1 = 0 \)</span>
-		<cite>
-			<a href="share/Euler_s__identity.mp4" target="_blank">求证</a>
-		</cite>
+		<div class="math">
+			<span class="formula">\( e^{i \pi} + 1 = 0 \)</span>
+			<cite>
+				<a href="share/Euler_s__identity.mp4" target="_blank">求证</a>
+			</cite>
+		</div>
+	</article>
+</li>
+<li class="box">
+	<article>
+		<header class="center">万物的基石</header>
+		<img class="phy" alt="higgs" src="img/Elementary_particle_interactions.svg">
+	</article>
+</li>
+<li class="box">
+	<article>
+		<header class="center">门捷列夫的空当接龙</header>
+		<img class="chem" alt="table" src="img/Mendeleev's_1869_periodic_table.png">
 	</article>
 </li>
 </ul>
