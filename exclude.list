@@ -1,7 +1,10 @@
+css/*
 share/*
 js/*
 build.sh
 exclude.list
+*.jar
+
 
 .*
 *~
