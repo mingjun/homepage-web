@@ -89,23 +89,6 @@
 	</article>
 </li>
 </ul>
-
-<div class="upload">
-	<button class="heading">发送文件给我</button>
-	<div class="action hidden">
-		<form id="form" action="data/files" method="post"
-			enctype="multipart/form-data" target="upload">
-			<input type="file" id="file" name="file" multiple />
-			<button type="submit">上传</button>
-		</form>
-		<div class="hidden">
-			<progress max="100" value="0">0%</progress>
-			<span></span>
-		</div>
-		<iframe id="upload" name="upload"></iframe>
-		<ul class="hidden"></ul>
-	</div>
-</div>
 <div>
 	关注我：
 	<ul class="follow">
@@ -157,75 +140,6 @@
 	中国上海，科苑路399号10号楼，邮编:201203
 </address>
 </footer>
-<script type="text/javascript">
-var dojoConfig = {
-	baseUrl: "/js/",
-	packages: [
-		{ name: "dojo", location: "dojo" },
-		{ name: "dijit", location: "dijit" },
-		{ name: "dojox", location: "dojox" },
-		{ name: "xmj", location: "xmj", main: "xmj" }
-	]
-};
-</script>
-<script type="text/javascript" src="/js/dojo/dojo.js" data-dojo-config="async:true"></script>
-<script type="text/javascript">
-require(["xmj"], function(xmj){
-
-require([
-	"dojo/domReady",
-	"dojo/dom",
-	"dojo/dom-construct",
-	"dojo/dom-class",
-	"dojo/_base/array",
-	"dojo/on",
-	"dojo/query",
-	"dojo/json",
-	"dojo/_base/xhr",
-	"xmj/UploadHelper",
-	"xmj/formatter"
-],
-function(ready, dom, domConstruct, domClass, array, on, query, json, xhr,
-		UploadHelper, formatter) {
-	ready(function () {
-		var uploadContainer = query(".upload")[0];
-		var uploadHeading = query(".heading", uploadContainer)[0];
-		on(uploadHeading, "click", function() {
-			xhr("GET", {url: "data/session", handleAs: "json"}).then(
-				function(session) {
-					domClass.toggle(uploadContainer, "box");
-					domClass.toggle(query(".action", uploadContainer)[0], "hidden");
-				},
-				function(error) {
-					uploadHeading.innerHTML="功能暂时无效";
-				}
-			);
-		});
-		var progressContainer = query("form~div", uploadContainer)[0];
-		function createLinks(fileInfos) {
-			domClass.add(progressContainer, "hidden");
-			var list = query("iframe#upload+ul", uploadContainer)[0];
-			fileInfos && domClass.toggle(list, "hidden", fileInfos.length===0);
-			array.forEach(fileInfos, function(info) {
-				var item = domConstruct.create("li", {}, list, "last");
-				var a = domConstruct.create("a", {href: info.uploadedUrl, innerHTML: info.uploadedName}, item, "only");
-			});
-		}
-
-		var progress = query("progress", progressContainer)[0];
-		var uploadPogressText = query("span", uploadContainer)[0];
-		function showProgress(p) {
-			domClass.remove(progressContainer, "hidden");
-			uploadPogressText.innerHTML = formatter.toSpace(p.uploadSize) +"/"+ formatter.toSpace(p.totalSize);
-			progress.value=p.percentage;
-		}
-		(new UploadHelper).bind(query("form", uploadContainer)[0], dom.byId("upload"), showProgress, createLinks);
-
-	});
-});
-
-});
-</script>
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

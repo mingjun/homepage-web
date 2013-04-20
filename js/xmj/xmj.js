@@ -1,10 +1,9 @@
 define(
 [
-	"./UploadHelper",
 	"./formatter",
 	"./SearchHelper",
 	"./PhotoHelper"
 ],
-function(chart) {
+function() {
 	return {version: new Date().toString()};
 });

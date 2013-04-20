@@ -7,7 +7,7 @@ define([
 		{name:"KB", value: K},
 		{name:"MB", value: K*K},
 		{name:"GB", value: K*K*K},
-		{name:"PB", value: K*K*K*K},
+		{name:"TB", value: K*K*K*K},
 		{name:"PB", value: K*K*K*K*K}
 	];
 
