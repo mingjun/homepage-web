@@ -3,75 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <title>雕龙·文心·影集</title>
-<link rel="stylesheet" type="text/css" href="../css/common.css" />
+<link rel="stylesheet" type="text/css" href="/css/common.css" />
+<link rel="stylesheet" type="text/css" href="/css/wenxin.css" />
 <style type="text/css">
-body {
-	margin: 0;
-	background: black;
-}
-.album {
-	width: 100%;
-	height: 500px;
-	font-size: 0;
-}
-.album > .previous, .album > .next, .album > .current {
-	display: inline-block;
-	height: 85%;
-	margin: 20px 0;
-	background-repeat: no-repeat;
-}
-.previous, .next {
-	cursor: pointer;
-	min-width: 30px;
-	width: 20%;
-	background-size: auto 100%;
-}
-.previous {
-	background-position: right center;
-	-webkit-mask: -webkit-gradient(linear, right top, left top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
-}
- .next {
-	background-position: left center;
-	-webkit-mask: -webkit-gradient(linear, left top, right top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
-}
-.current {
-	min-width: 240px;
-	width: 60%;
-	background-size: auto 100%;
-	background-position: center center;
-}
-.message {
-	color: orange;
-	text-align: center;
-	font-size: 20px;
-	display: block;
-	clear: both;
-}
-.message>a:link, .message>a:visited {
-	color: orange;
-	font-weight: bold;
-}
-.menu {
-	color: orange;
-	text-align: center;
-	font-size: 20px;
-}
-.menu > * {
-	cursor: pointer;
-}
+
 </style>
 </head>
 <body>
-<div>
+<div class="main">
 	<div class="album">
-		<div class="previous"></div>
-		<div class="current">  </div>
-		<div class="next"></div>
-		<div class="message"><a href="#" target="_blank">图片名称</a></div>
-		<div class="menu"><span class="play">幻灯片播放</span></div>
+		<div class="previous"><div class="img"></div></div>
+		<div class="current"><span class="time text">图片加载中...</span></div>
+		<div class="next"><div class="img"></div></div>
+
+		<div class="message text"><a href="#" target="_blank"></a></div>
+		<div class="menu text">
+			<span class="shuffle s_not">
+				<span class="shuffle_text">乱序<span class="shortcut">F1</span></span>
+				<span class="reset_text">重置<span class="shortcut">F2</span></span>
+			</span>
+			<span class="play s_not">
+				<span class="play_text">幻灯片播放</span>
+				<span class="stop_text">暂停播放</span>
+			</span>
+		</div>
 	</div>
 </div>
-<div class="hidden">
+<div class="hidden hackImgs">
 	<img alt="" src="">
 	<img alt="" src="">
 	<img alt="" src="">
@@ -81,7 +39,7 @@ body {
 
 <script type="text/javascript">
 var dojoConfig = {
-	baseUrl: "../js/",
+	baseUrl: "/js/",
 	packages: [
 		{ name: "dojo", location: "dojo" },
 		{ name: "dijit", location: "dijit" },
@@ -90,7 +48,7 @@ var dojoConfig = {
 	]
 };
 </script>
-<script type="text/javascript" src="../js/dojo/dojo.js" data-dojo-config="async:true"></script>
+<script type="text/javascript" src="/js/dojo/dojo.js" data-dojo-config="async:true"></script>
 <script type="text/javascript">
 require(["xmj"], function(xmj){
 require([
