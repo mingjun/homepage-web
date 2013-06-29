@@ -9,22 +9,26 @@ define([
 	"dojo/_base/array",
 	"dojo/keys"
 ], function(on, query, domStyle, domClass, json, xhr, array, keys) {
+
 	//math
 	function modInRange(x, n) {
 		var m = x % n;
 		(m < 0) && (m += n);
 		return m;
 	}
+
 	/**
-	 * a list of n (2m+1) elements
-	 * f(0) -> m
-	 * f(1) -> m+1
-	 * f(2) -> m-1
-	 * f(3) -> m+2
+	 * reorder a list of with (2m+1) elements
+	 * @param x: index in the list
+	 * @param n: the size of the list n==2m+1
+	 * f(0, 2m+1) -> m
+	 * f(1, 2m+1) -> m+1
+	 * f(2, 2m+1) -> m-1
+	 * f(3, 2m+1) -> m+2
 	 * ...
 	 */
 	function reorderMid2Sides(x, n) {
-		var m = Math.floor(n-1)/2;
+		var m = Math.floor((n-1)/2);
 		return (x % 2 === 0) ?
 		 (m - (x/2)) :
 		 (m + (x+1)/2);
@@ -60,6 +64,8 @@ define([
 		}
 		return s !== t;
 	}
+
+
 	/**
 	 * @param index: center index
 	 * @param list: source list for all photo info
@@ -81,6 +87,7 @@ define([
 		query(".hackImgs>img").forEach(function(img, i) {
 			img.src = r[reorderMid2Sides(i, count)].url;
 		});
+
 		return r;
 	}
 	/**
@@ -90,18 +97,20 @@ define([
 		var a = /(\d+):(\d+):(\d+):(\d+:\d+):\d+/.exec(time);
 		return a[1]+"年"+a[2]+"月"+a[3]+"日 "+a[4];
 	}
-	var domNode = {};
+
+
+	var domNodes = {};
 	function displayImages(dList) {
 			var mid = (dList.length-1)/2;
 			var c = dList[mid];
 			var url = c.url;
 			var file = url.substring(url.lastIndexOf("/") + 1);
-			domNode.message.innerHTML = file;
-			domNode.message.href = url;
-			domNode.time.innerHTML = parseTime(c.time);
-			setBG(domNode.current, c);
-			setBG(domNode.previous, dList[mid-1]);
-			setBG(domNode.next, dList[mid+1]);
+			domNodes.message.innerHTML = file;
+			domNodes.message.href = url;
+			domNodes.time.innerHTML = parseTime(c.time);
+			setBG(domNodes.current, c);
+			setBG(domNodes.previous, dList[mid-1]);
+			setBG(domNodes.next, dList[mid+1]);
 	}
 	//show photo as a BG (background)
 	function setBG(node, photo) {
@@ -120,25 +129,25 @@ define([
 		}
 		showNext(0);
 
-		on(domNode.next, "click", function(){
+		on(domNodes.next, "click", function(){
 			showNext(1);
 		});
-		on(domNode.previous, "click", function(){
+		on(domNodes.previous, "click", function(){
 			showNext(-1);
 		});
 
 		var shuffled = false;
-		on(domNode.shuffle, "click", function(e){
+		on(domNodes.shuffle, "click", function(e){
 			if(!shuffled) {
 				shuffle(list);
 				currentIndex = 0;
 				showNext(0);
-				domClass.remove(domNode.shuffle, "s_not");
+				domClass.remove(domNodes.shuffle, "s_not");
 			} else {
 				sort(list, "time");
 				currentIndex = 0;
 				showNext(0);
-				domClass.add(domNode.shuffle, "s_not");
+				domClass.add(domNodes.shuffle, "s_not");
 			}
 			shuffled = !shuffled;
 		});
@@ -149,14 +158,14 @@ define([
 			showNext(1);
 			h = setTimeout(playStep, DURATION);
 		}
-		on(domNode.play, "click", function(){
+		on(domNodes.play, "click", function(){
 			if(h !== 0) {
 				clearTimeout(h);
 				h = 0;
-				domClass.add(domNode.play, "s_not");
+				domClass.add(domNodes.play, "s_not");
 			} else {
 				h = setTimeout(playStep, DURATION);
-				domClass.remove(domNode.play, "s_not");
+				domClass.remove(domNodes.play, "s_not");
 			}
 		});
 
@@ -189,34 +198,34 @@ define([
 				shuffle(list);
 				currentIndex = 0;
 				showNext(0);
+				domClass.remove(domNodes.shuffle, "s_not");
 				break;
 			case keys.F2:
 				sort(list, "time");
 				currentIndex = 0;
 				showNext(0);
+				domClass.add(domNodes.shuffle, "s_not");
 			}
 		});
 		//enable actions in page
-		domClass.add(domNode.root, "s_loaded");
+		domClass.add(domNodes.root, "s_loaded");
 	}
 
 	var enabled = false;
+	/**
+	 * helper is the export object
+	 * usage:
+	 *     helper.enable()
+	 */
 	var helper = {
 		// enable the all functionalities
-		enable: function(node) {
+		enable: function(nodes) {
 			if(!enabled) {
 				enabled = true;
 			} else {
 				return;
 			}
-			domNode.root = node;
-			domNode.previous = query(">.previous>.img", node)[0];
-			domNode.current = query(">.current", node)[0];
-			domNode.next = query(">.next>.img", node)[0];
-			domNode.time = query(">.current>.time", node)[0];
-			domNode.message = query(">.message>a", node)[0];
-			domNode.shuffle = query(">.menu>.shuffle", node)[0];
-			domNode.play = query(">.menu>.play", node)[0];
+			domNodes = nodes;
 
 			var key = "photoList";
 			var listStr = localStorage.getItem(key);
@@ -242,7 +251,7 @@ define([
 				}
 			}, function(err) {
 				if(!configged) {
-					domNode.time.innerHTML = "服务器维护中...请稍后尝试。";
+					domNodes.time.innerHTML = "服务器维护中...请稍后尝试。";
 				}
 			});
 		}

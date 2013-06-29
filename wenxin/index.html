@@ -58,7 +58,17 @@ require([
 	],
 	function(ready, query, PhotoHelper) {
 		ready(function(){
-			PhotoHelper.enable(query("div.album")[0]);
+			var node = query("div.album")[0];
+			PhotoHelper.enable({
+				root : node,
+				previous : query(">.previous>.img", node)[0],
+				current : query(">.current", node)[0],
+				next : query(">.next>.img", node)[0],
+				time : query(">.current>.time", node)[0],
+				message : query(">.message>a", node)[0],
+				shuffle : query(">.menu>.shuffle", node)[0],
+				play : query(">.menu>.play", node)[0]
+			});
 		});
 });
 });
